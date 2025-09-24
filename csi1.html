@@ -38,6 +38,7 @@
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0, 255, 255, 0.1);
+      -webkit-backdrop-filter: blur(20px); /* Safari/iOS fix */
       backdrop-filter: blur(20px);
       border: 1px solid rgba(0, 255, 255, 0.3);
       border-radius: 50px;
@@ -100,6 +101,7 @@
     .content-wrapper {
       position: relative;
       z-index: 2;
+      -webkit-backdrop-filter: blur(1px); /* Safari/iOS fix */
       backdrop-filter: blur(1px);
       padding-top: 80px;
     }
@@ -168,9 +170,10 @@
       text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
       animation: glow 3s ease-in-out infinite alternate;
       background: linear-gradient(45deg, #00ffff, #ffffff, #00ffff);
-      -webkit-background-clip: text;
+      -webkit-background-clip: text; /* Prefixed for compatibility */
       background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-text-fill-color: transparent; /* Prefixed for compatibility */
+      color: transparent; /* Standard property */
       background-size: 200% 200%;
       animation: gradientShift 3s ease infinite, glow 3s ease-in-out infinite alternate;
     }
@@ -376,6 +379,7 @@
       position: relative;
       overflow: hidden;
       transition: all 0.4s ease;
+      -webkit-backdrop-filter: blur(10px); /* Safari/iOS fix */
       backdrop-filter: blur(10px);
     }
 
@@ -459,6 +463,7 @@
       border-left: 5px solid #00ffff;
       position: relative;
       transition: all 0.4s ease;
+      -webkit-backdrop-filter: blur(5px); /* Safari/iOS fix */
       backdrop-filter: blur(5px);
     }
 
@@ -552,6 +557,7 @@
       border-top: 3px solid #00ffff;
       margin-top: 60px;
       position: relative;
+      -webkit-backdrop-filter: blur(10px); /* Safari/iOS fix */
       backdrop-filter: blur(10px);
     }
 
@@ -629,10 +635,8 @@
 </head>
 <body>
 
-<!-- Scroll Progress Bar -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- Navigation Bar -->
 <nav class="nav-bar">
   <a href="#home" class="nav-item">🏠 Home</a>
   <a href="#countdown" class="nav-item">⏰ Countdown</a>
@@ -641,10 +645,8 @@
   <a href="#register" class="nav-item">📝 Register</a>
 </nav>
 
-<!-- 3D Background Canvas -->
 <canvas id="bg-canvas"></canvas>
 
-<!-- Animated Particles -->
 <div class="particles" id="particles"></div>
 
 <div class="content-wrapper">
@@ -659,7 +661,6 @@
     <p><strong> Association of Information Technology Engineers of CSIIT </strong></p>
   </header>
 
-  <!-- Enhanced Countdown Timer Section -->
   <div class="countdown-container" id="countdown">
     <h2 class="countdown-title">🚀 EVENT COUNTDOWN 🚀</h2>
     <p class="countdown-subtitle">Get ready for the ultimate tech experience!</p>
@@ -764,7 +765,7 @@ function init3DBackground() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Enhanced particle system
-  const particleCount = 1500;
+  const particleCount = 500; // Performance Optimization: Reduced from 1500
   const positions = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
   const sizes = new Float32Array(particleCount);
@@ -841,7 +842,8 @@ function updateCountdown() {
 function createParticles() {
   const particlesContainer = document.getElementById('particles');
   
-  for (let i = 0; i < 80; i++) {
+  // Performance Optimization: Reduced from 80
+  for (let i = 0; i < 30; i++) { 
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.left = Math.random() * 100 + '%';
@@ -906,5 +908,5 @@ window.addEventListener('mousemove', onMouseMove);
 window.addEventListener('scroll', updateScrollProgress);
 </script>
 
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'982295adf60d0bbe',t:'MTc1ODM4NDU0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
